@@ -18,6 +18,53 @@ local Nofall = Main:CreateSection({
 Name = "Nofall"
 })
 
+local Alert = Main:CreateSection({
+Name = "Alert"
+})
+
+Alert:AddButton({
+Name = "Mod Detector",
+Callback = function()
+while wait() do
+local mods = {
+ "WTeAbInTUK",
+ "5lko",
+ "SpirituaILuke",
+ "smurfhing",
+ "Norik_o",
+ "VeryMoodyDays",
+ "pvibe_",
+ "Nebuloussu",
+ "tx8ekiii",
+ "kiznizl",
+ "buckmane",
+ "VeryMoodyDays",
+ "CrimsonRyu",
+ "r6yden",
+ "robloxsomuchfun60958",
+ "Femboy_Poodle",
+ "SpirituaILuke",
+ "kikigono",
+ "kosaderi"
+}
+local function rape(v)
+if table.find(mods,v.Name) then
+game.StarterGui:SetCore("SendNotification", {
+Title = "Mod Detected"; -- the title (ofc)
+Text = "Nigga has join the game"; -- what the text says (ofc)
+Icon = "rbxassetid://57254792"; -- the image if u want. 
+Duration = 120; -- how long the notification should in secounds
+})
+end
+end
+for _,v in pairs(game:GetService("Players"):GetPlayers()) do rape(v) end
+game:GetService("Players"):GetPlayers().PlayerAdded:Connect(rape)
+end
+end
+})
+
+
+
 Nofall:AddButton({
 Name = "Nofall Method 1",
 Callback = function()
@@ -596,7 +643,7 @@ Name = "Shore Obelisk",
 Callback = function()
     plr.Character.HumanoidRootPart.CFrame = CFrame.new(5798.93799, 328.580139, 633.944214, 0, 0, 1, 1, 0, 0, 0, 1, 1)
     wait(0.4)
-    plr.Character.HumanoidRootPart.CFrame = CFrame.new(662.755981, 365.696777, 2401.70117, 1, 0, 0, 0, 1, 0, 0, 0, 1)
+    plr.Character.HumanoidRootPart.CFrame = game.workspace.NPCs.ObeliskShore.HumanoidRootPart.CFrame
 end
 })
 
@@ -605,7 +652,7 @@ Name = "Tundra Obelisk",
 Callback = function()
     plr.Character.HumanoidRootPart.CFrame = CFrame.new(5798.93799, 328.580139, 633.944214, 0, 0, 1, 1, 0, 0, 0, 1, 1)
     wait(0.4)
-    plr.Character.HumanoidRootPart.CFrame = CFrame.new(7103.78174, 1315.04395, 653.68689, 0, 0, 1, 0, 1, -0, -1, 0, 0)
+    plr.Character.HumanoidRootPart.CFrame = game.workspace.NPCs.ObeliskTundra.HumanoidRootPart.CFrame
 end
 })
 
@@ -614,7 +661,7 @@ Name = "DeepForest Obelisk",
 Callback = function()
     plr.Character.HumanoidRootPart.CFrame = CFrame.new(5798.93799, 328.580139, 633.944214, 0, 0, 1, 1, 0, 0, 0, 1, 1)
     wait(0.4)
-    plr.Character.HumanoidRootPart.CFrame = CFrame.new(1006.13293, 47.8760986, -3227.12939, 0.999964118, 0.00280959695, 0.00799155701, -0.00283151586, 0.999992251, 0.0027308811, -0.00798380375, -0.00275342679, 0.999964356)
+    plr.Character.HumanoidRootPart.CFrame = game.workspace.NPCs.ObeliskDeepForest.HumanoidRootPart.CFrame
 end
 })
 
@@ -623,7 +670,7 @@ Name = "Forest Obelisk",
 Callback = function()
     plr.Character.HumanoidRootPart.CFrame = CFrame.new(5798.93799, 328.580139, 633.944214, 0, 0, 1, 1, 0, 0, 0, 1, 1)
     wait(0.4)
-    plr.Character.HumanoidRootPart.CFrame = CFrame.new(1706.948, 338.998688, -722.821655, 0.999449253, 5.41859263e-05, 0.0331854373, -5.5458446e-07, 0.999998689, -0.00161602325, -0.033185482, 0.00161511463, 0.999447942)
+    plr.Character.HumanoidRootPart.CFrame = game.workspace.NPCs.ObeliskForest.HumanoidRootPart.CFrame
 end
 })
 
@@ -632,7 +679,7 @@ Name = "Skycastle Obelisk",
 Callback = function()
     plr.Character.HumanoidRootPart.CFrame = CFrame.new(5798.93799, 328.580139, 633.944214, 0, 0, 1, 1, 0, 0, 0, 1, 1)
     wait(0.4)
-    plr.Character.HumanoidRootPart.CFrame = CFrame.new(133.633087, 3614.85596, 360.571655, -0.999863267, 2.44241463e-08, -0.0165357832, 2.46868268e-08, 1, -1.56815076e-08, 0.0165357832, -1.60875793e-08, -0.999863267)
+    plr.Character.HumanoidRootPart.CFrame = game.workspace.NPCs.ObeliskSkyCastle.HumanoidRootPart.CFrame
 end
 })
 
@@ -642,7 +689,7 @@ Name = "Sigil Obelisk",
 Callback = function()
     plr.Character.HumanoidRootPart.CFrame = CFrame.new(5798.93799, 328.580139, 633.944214, 0, 0, 1, 1, 0, 0, 0, 1, 1)
     wait(0.4)
-    plr.Character.HumanoidRootPart.CFrame = CFrame.new(6585.75879, 1320.27148, 465.19397, -0.999977469, -7.76229712e-08, 0.0067132432, -7.80059466e-08, 1, -5.67858685e-08, -0.0067132432, -5.7308263e-08, -0.999977469)
+    plr.Character.HumanoidRootPart.CFrame = game.workspace.NPCs.ObeliskSigil.HumanoidRootPart.CFrame
 end
 })
 
@@ -651,7 +698,7 @@ Name = "Snail Obelisk",
 Callback = function()
     plr.Character.HumanoidRootPart.CFrame = CFrame.new(5798.93799, 328.580139, 633.944214, 0, 0, 1, 1, 0, 0, 0, 1, 1)
     wait(0.4)
-    plr.Character.HumanoidRootPart.CFrame = CFrame.new(5787.25879, 1113.29126, 861.876526, 0.998228312, 0.00615248038, -0.0591812544, -0.0059228912, 0.999974191, 0.00405425951, 0.0592046976, -0.00369657273, 0.9982391)
+    plr.Character.HumanoidRootPart.CFrame = game.workspace.NPCs.ObeliskSnail.HumanoidRootPart.CFrame
 end
 })
 
@@ -660,7 +707,7 @@ Name = "Mod zone"
 })
 
 tp1:AddButton({
-Name = "Mod office",
+Name = "Mod office (for some game)",
 Callback = function()
     plr.Character.HumanoidRootPart.CFrame = CFrame.new(5798.93799, 328.580139, 633.944214, 0, 0, 1, 1, 0, 0, 0, 1, 1)
     wait(0.4)
@@ -669,7 +716,16 @@ end
 })
 
 tp1:AddButton({
-Name = "Norpa (mana shield)",
+Name = "Mod office (for rlrm)",
+Callback = function()
+    plr.Character.HumanoidRootPart.CFrame = CFrame.new(5798.93799, 328.580139, 633.944214, 0, 0, 1, 1, 0, 0, 0, 1, 1)
+    wait(0.4)
+    plr.Character.HumanoidRootPart.CFrame = CFrame.new(3295.21436, 11492.25, -5314.97852, 0.743801355, -5.94423932e-09, 0.668400705, -1.21851873e-09, 1, 1.02492033e-08, -0.668400705, -8.43783088e-09, 0.743801355)
+end
+})
+
+tp1:AddButton({
+Name = "Norpa",
 Callback = function()
     plr.Character.HumanoidRootPart.CFrame = CFrame.new(5798.93799, 328.580139, 633.944214, 0, 0, 1, 1, 0, 0, 0, 1, 1)
     wait(0.4)
@@ -677,14 +733,6 @@ Callback = function()
 end
 })
 
-tp1:AddButton({
-Name = "Kamui",
-Callback = function()
-    plr.Character.HumanoidRootPart.CFrame = CFrame.new(5798.93799, 328.580139, 633.944214, 0, 0, 1, 1, 0, 0, 0, 1, 1)
-    wait(0.4)
-    plr.Character.HumanoidRootPart.CFrame = CFrame.new(-1238.46912, 1044.6991, 29040.748, 0.59339869, 5.10294607e-09, -0.804908693, -7.09856351e-09, 1, 1.10654474e-09, 0.804908693, 5.05707343e-09, 0.59339869)
-end
-})
 
 local tp2 = Teleport:CreateSection({
 Name = "Safe teleport"
@@ -704,7 +752,7 @@ Name = "Gacha room",
 Callback = function()
     plr.Character.HumanoidRootPart.CFrame = CFrame.new(5798.93799, 328.580139, 633.944214, 0, 0, 1, 1, 0, 0, 0, 1, 1)
     wait(0.4)
-    plr.Character.HumanoidRootPart.CFrame = CFrame.new(1007.96448, 3827.13916, 143.107513, 0.999999523, 2.69786664e-08, 0.000959955505, -2.68550195e-08, 1, -1.28817206e-07, -0.000959955505, 1.28791356e-07, 0.999999523)
+    plr.Character.HumanoidRootPart.CFrame = CFrame.new(-95.8150864, 3827.13916, 187.365417, 0.999999523, 4.05176394e-07, 0.000958392862, -4.04756008e-07, 1, -4.3881596e-07, -0.000958392862, 4.38427833e-07, 0.999999523)
 end
 })
 
@@ -842,5 +890,16 @@ local paocr = game.Workspace.NPCs["The Eagle"].ClickDetector
     plr.Character.HumanoidRootPart.CFrame = CFrame.new(4551.49854, 519.950134, 393.604553, 0.999984443, -5.99904197e-08, 0.00557542872, 6.05486292e-08, 1, -9.99506042e-08, -0.00557542872, 1.00286641e-07, 0.999984443)
     wait(0.4)
     plr.Character.HumanoidRootPart.CFrame = CFrame.new(5789.40137, 410.392822, 640.246948, -1, 0, 0, 0, 1, 0, 0, 0, -1)
+end
+})
+
+local inf = Main:CreateSection({
+Name = "inf yield"
+})
+
+inf:AddButton({
+Name = "Inf yield",
+Callback = function()
+loadstring(game:HttpGet(('https://raw.githubusercontent.com/EdgeIY/infiniteyield/master/source'),true))()   
 end
 })
