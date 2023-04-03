@@ -1,0 +1,902 @@
+-----loadstring(game:HttpGet("https://raw.githubusercontent.com/Paopro/Pao-minion/main/Pao"))()
+
+
+loadstring(game:HttpGet("https://pastebin.com/raw/SFbtDaQk", true))()
+local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+local Window = Library.CreateLib("Floppa Hub", "Sentinel")
+local plr = game.Players.LocalPlayer
+local Player = game:GetService("Players").LocalPlayer;
+
+
+---Character
+
+local Tab = Window:NewTab("Character")
+local Section = Tab:NewSection("Character")
+Section:NewButton("Nofall Method 1", "Press again if it won't work", function()
+    game:GetService("Players").LocalPlayer.Character.CharacterHandler.Remotes.FallDamage:Destroy()
+end)
+
+Section:NewButton("Nofall Method 2", "Press again if it won't work", function()
+    game.Players.LocalPlayer.Character.CharacterHandler.Remotes.ApplyFallDamage:Destroy()
+end)
+
+Section:NewButton("Nofall Method 3", "Press again if it won't work", function()
+    game:GetService("Players").LocalPlayer.Character.CharacterHandler.Remotes.ApplyFallDamage:Destroy()
+end)
+
+
+
+
+Section:NewButton("Auto Pickup ", "pao pro", function()
+        repeat task.wait() until game:IsLoaded()
+local Player = game:GetService("Players").LocalPlayer;
+assert(Player.Character, "Must be spawned in");
+pcall(function()
+    coroutine.resume(coroutine.create(function()
+        while task.wait(0.25) do
+            for i,v in pairs(workspace.Trinkets:GetChildren()) do
+                if not Player.Character then Player.CharacterAdded:Wait() end
+                if (Player.Character:WaitForChild("HumanoidRootPart").Position - v.Position).Magnitude < 15 then
+                    if v:FindFirstChild("ClickPart") and v.Parent ~= nil then
+                        task.wait(0.05);
+                        fireclickdetector(v.ClickPart.ClickDetector, 14);
+                    elseif v.Parent ~= nil and not v:FindFirstChild("ClickPart") then
+                        fireclickdetector(v.ClickDetector, 14);
+                    end;
+                end;
+            end;
+        end;
+    end));
+end);
+end)
+
+
+Section:NewButton("No Injuries", "idk too how it work", function()
+	game.Players.LocalPlayer.Character.CharacterHandler.Remotes.Injure:Destroy()
+end)
+
+Section:NewToggle("No Stun", "No stun", function(state)
+    if state then
+		game.Players.LocalPlayer.Character.ChildAdded:Connect(function(child)
+			if _G.BP == true and child.Name == "Sprinting" or child.Name == "Action" or child.Name == "NoJump" or child.Name == "HeavyAttack" or child.Name == "LightAttack" or child.Name == "NoJump" or child.Name == "ForwardDash" or child.Name == "RecentDash" or child.Name == "ClimbCoolDown" or child.Name == "BrokenLeg" or child.Name == "Knocked" or child.Name == "Unconscious" or child.Name == "BrokenLeg" or child.Name == "BrokenRib" or child.Name == "BrokenArm" or child.Name == "NoDam" or child.Name == "NoDash" or child.Name == "Casting" or child.Name == "BeingExecuted" or child.Name == "IsClimbing" or child.Name == "Stun" then
+				wait()
+				child:Remove()
+			end
+		end)
+    else
+		game.Players.LocalPlayer.Character.ChildAdded:Connect(function(child)
+			if _G.BP == false and child.Name == "Sprinting" or child.Name == "Action" or child.Name == "NoJump" or child.Name == "HeavyAttack" or child.Name == "LightAttack" or child.Name == "NoJump" or child.Name == "ForwardDash" or child.Name == "RecentDash" or child.Name == "ClimbCoolDown" or child.Name == "BrokenLeg" or child.Name == "Knocked" or child.Name == "Unconscious" or child.Name == "BrokenLeg" or child.Name == "BrokenRib" or child.Name == "BrokenArm" or child.Name == "NoDam" or child.Name == "NoDash" or child.Name == "Casting" or child.Name == "BeingExecuted" or child.Name == "IsClimbing" or child.Name == "Stun" then
+				wait()
+			end
+		end)
+    end
+end)
+
+Section:NewButton("Attach to back", "Press X on LocalPlayer Humanoid Part", function()
+	pcall(function()
+		local UIS = game:GetService("UserInputService")
+		local Player = game:GetService("Players").LocalPlayer
+		local Mouse = Player:GetMouse()
+		local t2
+		
+		UIS.InputBegan:Connect(function(i, t)
+			if i.KeyCode == Enum.KeyCode.X and not t then
+				local target = Mouse.Target
+				if target ~= nil and target.Parent:FindFirstChild("Humanoid") and not t then
+					t2 = true
+					if (Player.Character.Head.Position - target.Parent.Head.Position).Magnitude < 100  and t2 then
+						while wait() do
+							Player.Character.HumanoidRootPart.CFrame = target.Parent.HumanoidRootPart.CFrame * CFrame.new(0,0,3)
+							if t2 == false then
+								break
+							end
+						end
+					end
+				else
+					t2 = false
+					target = nil
+				end
+			end
+		end)
+	 end)
+end)
+
+Section:NewButton("Observe", "Click on Leaderboard", function()
+	if not game.Players.LocalPlayer.PlayerGui:FindFirstChild("LeaderboardGui") then
+		local NewLB = game.StarterGui:FindFirstChild("LeaderboardGui"):Clone()
+		NewLB.Parent = game.Players.LocalPlayer.PlayerGui
+		NewLB.ResetOnSpawn = true
+		local Connection
+		Connection = game.Players.LocalPlayer.CharacterAdded:Connect(function()
+			NewLB:Destroy()
+			Connection:Disconnect()
+		end)
+	end
+	if game.Players.LocalPlayer.PlayerGui:FindFirstChild("StartMenu") then
+		game.Players.LocalPlayer.PlayerGui:FindFirstChild("StartMenu").CopyrightBar:Destroy()
+	end
+	--CopyrightBar
+	workspace.CurrentCamera.CameraType = Enum.CameraType.Custom
+	pcall(function()
+		shared.SPRLS = script
+		shared.SPROC = {}
+	
+		local Players = game:GetService "Players"
+		local UIS = game:GetService "UserInputService"
+		local RS = game:GetService "RunService"
+		local LocalPlayer = Players.LocalPlayer
+		local AdminMode = false
+		local Spectating
+		local PlayerData = {}
+	
+		LocalPlayer.PlayerGui:WaitForChild("LeaderboardGui"):WaitForChild("LeaderboardClient")
+		wait()
+	
+		function Find(Upvalues, Function)
+			local Constants = {}
+			if typeof(Upvalues) == "function" then
+				Constants = debug.getconstants(Upvalues)
+				Upvalues = debug.getupvalues(Upvalues)
+			end
+	
+			for i, v in pairs(Upvalues) do
+				local Env = getfenv(Function)
+				Env.Constants = Constants
+				setfenv(Function, Env)
+				local S, E = pcall(Function, v)
+	
+				if S and E then
+					local Env = getfenv(2)
+					Env.Value = v
+					Env.Index = i
+					setfenv(2, Env)
+					return v
+				end
+			end
+	
+			return false
+		end
+	
+		function InTable(Table, Value)
+			for i, v in pairs(Table) do
+				if v == Value then
+					return true
+				end
+			end
+	
+			return false
+		end
+	
+		UIS.InputEnded:Connect(function(Input, Processed)
+				if Input.UserInputType.Name == "Keyboard" and Input.KeyCode.Name == "Tab" and not Processed and UIS:IsKeyDown "LeftControl" and not UIS:IsKeyDown "LeftAlt" then AdminMode = not AdminMode end
+		end)
+	
+		local Runes = {}
+	
+		function OnCharacter(Character)
+			if not Character then
+				return false
+			end
+	
+			local Humanoid = Character:WaitForChild("Humanoid")
+			local LastHP = Humanoid.Health
+	
+			Humanoid.HealthChanged:Connect(function(NewHealth)
+				if Spectating and NewHealth < LastHP and LocalPlayer.Character == Character then
+					Spectating = nil
+					workspace.CurrentCamera.CameraSubject = LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+				end
+	
+				LastHP = NewHealth
+			end)
+		end
+	
+		function NameRightClick(Player, Label)
+			if script ~= shared.SPRLS then
+				return false
+			end
+	
+			local Button = Label:FindFirstChild "SPB" or Instance.new("TextButton", Label)
+			Button.Name = "SPB"
+			Button.Transparency = 1
+			Button.Text = ""
+			Button.Size = UDim2.new(1, 0, 1, 0)
+			Button.Position = UDim2.new(0, 0, 0, 0)
+	
+			local SpeedLabel = Label:FindFirstChild "SPA" or Instance.new("TextLabel", Label)
+			SpeedLabel.Visible = false
+			SpeedLabel.Name = "SPA"
+			SpeedLabel.BackgroundTransparency = 1
+			SpeedLabel.Text = "0s"
+			SpeedLabel.TextXAlignment = "Right"
+			SpeedLabel.Size = UDim2.new(1, 0, 1, 0)
+			SpeedLabel.Position = UDim2.new(0, -10, 0, 0)
+			SpeedLabel.TextColor3 = Color3.fromRGB(240, 240, 240)
+			SpeedLabel.TextStrokeColor3 = Color3.fromRGB(35, 35, 35)
+			SpeedLabel.TextStrokeTransparency = 0.75
+			SpeedLabel.Font = Label.Font
+			SpeedLabel.TextSize = Label.TextSize
+	
+			Button.MouseButton1Click:Connect(function()
+				if script ~= shared.SPRLS then
+					return false
+				end
+	
+				if (Spectating == Player or Player == LocalPlayer) and LocalPlayer.Character then
+					Spectating = nil
+					workspace.CurrentCamera.CameraSubject = LocalPlayer.Character:FindFirstChildOfClass("Humanoid")
+				else
+					if Player.Character and Player.Character:FindFirstChild("Humanoid") then
+						Spectating = Player
+						workspace.CurrentCamera.CameraType = Enum.CameraType.Custom
+	
+						local T = Spectating.Character:GetDescendants()
+						
+						if LocalPlayer.Character then
+							for i, v in pairs(LocalPlayer.Character:GetDescendants()) do
+								table.insert(T, v)
+							end
+						end
+	
+						for i, v in pairs(T) do
+							if v:IsA("Decal") and v.Parent.Name:match("Slot%d+") and not Runes[v] and v.Transparency == 1 then
+								Runes[v] = v.Transparency
+	
+								v:GetPropertyChangedSignal "Transparency":Connect(function()
+									v.Transparency = 1
+								end)
+							end
+						end
+	
+						workspace.CurrentCamera.CameraSubject = Player.Character:FindFirstChildOfClass "Humanoid"
+					end
+				end
+			end)
+	
+			local Stats = Player:WaitForChild("leaderstats", .05)
+			local Hidden = (Stats and Stats:WaitForChild("Hidden", .05) and Stats.Hidden.Value) or false
+	
+			PlayerData[Player] = {
+				LastUpdate = 0,
+				LastPosition = (Player.Character and Player.Character:FindFirstChild "HumanoidRootPart" and Player.Character.HumanoidRootPart.Position) or Vector3.new(0, 0, 0),
+				Suspicious = 0,
+				TPSafe = false,
+				Hidden = Hidden,
+				Label = Label,
+				Button = Button,
+				SpeedLabel = SpeedLabel
+			}
+			PlayerData[Player].LastPosition = Vector2.new(PlayerData[Player].LastPosition.X, PlayerData[Player].LastPosition.Z)
+	
+			Player.CharacterAdded:Connect(function(Character)
+				if game.Players.LocalPlayer.PlayerGui:FindFirstChild("ClonedBoard") then
+					game.Players.LocalPlayer.PlayerGui:FindFirstChild("ClonedBoard"):Destroy()
+				end
+				PlayerData[Player].LastPosition = Character:WaitForChild "HumanoidRootPart".Position
+				PlayerData[Player].LastPosition = Vector2.new(PlayerData[Player].LastPosition.X, PlayerData[Player].LastPosition.Z)
+				PlayerData[Player].Suspicious = 0
+			end)
+	
+			return Label
+		end
+	
+		OnCharacter(LocalPlayer.Character)
+		LocalPlayer.CharacterAdded:Connect(OnCharacter)
+	
+		for i, v in pairs(getreg()) do
+			if typeof(v) == "function" and islclosure(v) and not is_synapse_function(v) then
+				local ups = debug.getupvalues(v)
+				local scr = getfenv(v).script
+	
+				if
+					Find(
+						ups,
+						function(x)
+							return scr.Name == "LeaderboardClient" and typeof(x) == "function" and
+								InTable(debug.getconstants(x), "HouseRank")
+						end
+					)
+				then
+					local Labels = {}
+	
+					if
+						Find(
+							Value,
+							function(x)
+								return typeof(x) == "table" and x[LocalPlayer]
+							end
+						)
+					then
+						Labels = Value
+						for i, v in pairs(Value) do
+							NameRightClick(i, v)
+						end
+					end
+	
+					local Index = shared.SPROC[v] and shared.SPROC[v].Index or Index
+					local Original = shared.SPROC[v] and shared.SPROC[v].Function or debug.getupvalues(v)[Index]
+					shared.SPROC[v] = {Index = Index, Function = Original}
+	
+					debug.setupvalue(
+						v,
+						Index,
+						function(Player, ...)
+							local Label = Original(Player, ...)
+							local DummyConstant = "HouseRank"
+							local DummyTable = Labels
+	
+							NameRightClick(Player, Label)
+	
+							return Label
+						end
+					)
+				end
+			end
+		end
+	
+		local Last = 0
+	
+		RS:UnbindFromRenderStep("LSBI")
+	
+		RS:BindToRenderStep("LSBI",500,function()
+			if tick() - Last > 1 / 2 then
+				Last = tick()
+	
+				for Player, Data in pairs(PlayerData) do
+					local LastUpdate = Data.LastUpdate
+					local Suspicious = Data.Suspicious
+					local SpeedLabel = Data.SpeedLabel
+					local LastPosition = Data.LastPosition
+	
+					if Player.Character and Player.Character:FindFirstChild("HumanoidRootPart") then
+						if tick() - LastUpdate > 0.1 then
+							LastUpdate = tick()
+	
+							local NewPosition = Player.Character.HumanoidRootPart.Position
+							NewPosition = Vector2.new(NewPosition.X, NewPosition.Z)
+							local Velocity = (LastPosition - NewPosition).Magnitude
+	
+							SpeedLabel.Text = math.floor(Velocity) .. "s"
+	
+							if Velocity > 50 then
+								Suspicious = tick()
+							end
+	
+							LastPosition = Player.Character.HumanoidRootPart.Position
+							LastPosition = Vector2.new(LastPosition.X, LastPosition.Z)
+						end
+					end
+	
+					SpeedLabel.Visible = AdminMode
+					--SpeedLabel.TextColor3 = tick() - Suspicious < 5 and Color3.fromRGB(255, 50, 50) or Color3.fromRGB(240, 240, 240)
+	
+					local Color = Color3.fromRGB(240, 240, 240)
+					if tick() - Suspicious < 5 then
+						if Player.Character:FindFirstChild("TPSafe") then
+							Color = Color3.fromRGB(50, 255, 50)
+						elseif Player.Character:FindFirstChild("FlightOk") then
+							Color = Color3.fromRGB(255, 255, 50)
+						else
+							Color = Color3.fromRGB(255, 50, 50)
+						end
+					end
+					SpeedLabel.TextColor3 = Color 
+	
+					if Player:FindFirstChild("leaderstats") and Player.leaderstats:FindFirstChild("Hidden") then
+						if AdminMode then
+							Player.leaderstats.Hidden.Value = false
+						else
+							Player.leaderstats.Hidden.Value = Data.Hidden
+						end
+					end
+	
+					Data.Suspicious = Suspicious
+					Data.LastUpdate = LastUpdate
+					Data.LastPosition = LastPosition
+	
+					PlayerData[Player] = Data
+				end
+			end
+		end)
+	end)
+end)
+
+
+Section:NewButton("Reset", "Reset", function()
+	game:GetService("Players").LocalPlayer.Character:BreakJoints()
+end)
+
+Section:NewButton("Nofog + Fullbright", "Nofog + Fullbright", function()
+    while wait(1) do
+    game.Lighting.GlobalShadows = true
+    game.Lighting.Ambient = Color3.new(0.7,0.7,0.7)
+    game.Lighting.FogEnd = 100000
+    end
+end)
+
+Section:NewButton("Get Player Cframe", "Press again if it won't work", function()
+    setclipboard(tostring(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame))
+end)
+
+
+Section:NewButton("Illu detector", "Illu detector", function()
+    while wait(3) do
+    for i,v in pairs(game.Players:GetDescendants()) do
+   if v:IsA("Tool") and v.Name == "Globus" then
+	game.StarterGui:SetCore("SendNotification", {
+	Title = "Illuionist Detected"; -- the title (ofc)
+	Text = "Illuionist Is in your game"; -- what the text says (ofc)
+	Icon = "rbxassetid://57254792"; -- the image if u want. 
+	Duration = 120; -- how long the notification should in secounds
+	})
+   end
+end
+end
+end)
+
+Section:NewButton("Mod Detector", "Mod detector", function()
+while wait() do
+local mods = {
+ "trashg_ame",
+ "FirstComesTheStars",
+ "SheLovesAdonis",
+ "LiterallGalaxy",
+ "Regisaqt",
+ "NilsberCZ",
+ "b4ncck",
+ "Scendedee",
+ "tx8ekiii",
+ "kiznizl",
+ "buckmane",
+ "VeryMoodyDays",
+ "CrimsonRyu",
+ "r6yden",
+ "robloxsomuchfun60958",
+ "Femboy_Poodle",
+ "SpirituaILuke",
+ "kikigono",
+ "kosaderi",
+ "tooezforme1212"
+}
+local function rape(v)
+if table.find(mods,v.Name) then
+game.StarterGui:SetCore("SendNotification", {
+Title = "Mod Detected"; -- the title (ofc)
+Text = "Nigga has join the game"; -- what the text says (ofc)
+Icon = "rbxassetid://57254792"; -- the image if u want. 
+Duration = 120; -- how long the notification should in secounds
+})
+end
+end
+for _,v in pairs(game:GetService("Players"):GetPlayers()) do rape(v) end
+game:GetService("Players"):GetPlayers().PlayerAdded:Connect(rape)
+end
+end)
+
+
+
+Section:NewButton("Flight", "Hold J to fly", function()
+    local LP = game:GetService'Players'.LocalPlayer
+if not LP.Character then LP.CharacterAdded:Wait() end 
+local inputs = game:GetService'UserInputService'
+local Cam=workspace.CurrentCamera
+local T = LP.Character:WaitForChild'HumanoidRootPart'
+LP.CharacterAdded:Connect(function(Ch)
+    T=Ch:WaitForChild'HumanoidRootPart'
+end)
+local CONTROL = {
+    F = 0,
+    B = 0,
+    L = 0,
+    R = 0}
+local lCONTROL = {
+    F = 0,
+    B = 0,
+    L = 0,
+R = 0}
+local _UIS=game:GetService'UserInputService'
+local KeyCode=Enum.KeyCode
+Ev1 = _UIS.InputBegan:Connect(function(UIS, Gc)
+    if Gc then
+        return
+    end
+    if UIS.UserInputType == Enum.UserInputType.Keyboard then
+        if UIS.KeyCode == KeyCode.W then
+            CONTROL.F = 1
+        elseif UIS.KeyCode == KeyCode.S then
+            CONTROL.B = -1
+        elseif UIS.KeyCode == KeyCode.A then
+            CONTROL.L = -1
+        elseif UIS.KeyCode == KeyCode.D then
+            CONTROL.R = 1
+        end
+    end
+end)
+Ev2 = _UIS.InputEnded:Connect(function(UIS, Gc)
+    if Gc then
+        return
+    end
+    if UIS.UserInputType == Enum.UserInputType.Keyboard then
+        if UIS.KeyCode == KeyCode.W then
+            CONTROL.F = 0
+        elseif UIS.KeyCode == KeyCode.S then
+            CONTROL.B = 0
+        elseif UIS.KeyCode == KeyCode.A then
+            CONTROL.L = 0
+        elseif UIS.KeyCode == KeyCode.D then
+            CONTROL.R = 0
+        end
+    end
+end)
+local gg=getgenv
+local CFn=CFrame.new
+local VC3=Vector3.new
+local SPEED=0
+gg().Flying = false
+gg().BaseSpeed=200
+local RS=game:GetService'RunService'.RenderStepped
+local W=RS.Wait
+inputs.InputBegan:Connect(function(key)
+    if key.KeyCode==Enum.KeyCode.J and not inputs:GetFocusedTextBox() then
+        gg().Flying=true
+    end
+end)
+inputs.InputEnded:Connect(function(Key)
+    if Key.KeyCode==Enum.KeyCode.J then
+        gg().Flying=false
+    end
+end)
+spawn(function()
+    while wait() do
+        if gg().Flying then
+            W(RS)
+            if CONTROL.L+CONTROL.R~=0 or CONTROL.F+CONTROL.B~=0 then
+                SPEED=getgenv().BaseSpeed
+            elseif not(CONTROL.L+CONTROL.R~=0 or CONTROL.F+CONTROL.B~=0)and SPEED~=0 then
+                SPEED=0
+            end
+            if(CONTROL.L+CONTROL.R)~=0 or(CONTROL.F+CONTROL.B)~=0 then
+                T.Velocity=((Cam.CoordinateFrame.LookVector*(CONTROL.F+CONTROL.B))+((Cam.CoordinateFrame*CFn(CONTROL.L+CONTROL.R,(CONTROL.F+CONTROL.B)*.2,0).Position)-Cam.CoordinateFrame.Position))*SPEED
+                lCONTROL={F=CONTROL.F,B=CONTROL.B,L=CONTROL.L,R=CONTROL.R}
+            elseif(CONTROL.L+CONTROL.R)==0 and(CONTROL.F+CONTROL.B)==0 and SPEED~=0 then
+                T.Velocity=((Cam.CoordinateFrame.LookVector*(lCONTROL.F+lCONTROL.B))+((Cam.CoordinateFrame*CFn(lCONTROL.L+lCONTROL.R,(lCONTROL.F+lCONTROL.B)*.2,0).Position)-Cam.CoordinateFrame.Position))*SPEED
+            else
+                T.Velocity=VC3(0,1,0)
+            end
+        end
+    end
+end)
+CONTROL={F = 0,B = 0,L = 0,R = 0}
+lCONTROL={F = 0,B = 0,L = 0,R = 0}
+SPEED=0
+end)
+
+Section:NewButton("Auto Pickup Bag (USE IN KHEI ONLY)", "Khei only", function()
+repeat wait() until game.IsLoaded
+repeat wait() until game:GetService("Players").LocalPlayer
+repeat wait() until game:GetService("Players").LocalPlayer.Character
+
+local a=game:GetService("Workspace").Thrown;local b=function(c)firetouchinterest(c,game.Players.LocalPlayer.Character.HumanoidRootPart,0);firetouchinterest(c,game.Players.LocalPlayer.Character.HumanoidRootPart,1)end;a.ChildAdded:Connect(function(d)if d.Name=="ToolBag"then coroutine.resume(coroutine.create(function()repeat wait()b(d)until d==nil or d.Parent~=a end))end end)
+end)
+
+    
+Section:NewButton("Vulnere NoCD", "no cd", function()
+    local Plrs = game:GetService'Players'
+local RunS = game:GetService'RunService'
+if not Plrs.LocalPlayer then
+    Plrs.PlayerAdded:Wait()
+end
+local LP = Plrs.LocalPlayer
+local Char = LP.Character
+Char.ChildAdded:Connect(function(Obj)
+    RunS.Stepped:Wait()
+    if Obj.Name=='ArguereSingleCD'then
+        Obj:Destroy()
+    end
+end)
+end)
+
+Section:NewButton("Refresh cooldown manuel mode", "no cd", function()
+    local plrs = game:GetService("Players") 
+           for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+              if v:FindFirstChild("Skill") then 
+                v.Parent = game.Players.LocalPlayer.Character;
+                task.wait();
+                v:Destroy();
+              end
+           end
+end)
+
+Section:NewButton("Refresh cooldown press y", "no cd", function()
+
+local plrs = game:GetService("Players")
+local mouse = plrs.LocalPlayer:GetMouse()
+
+mouse.KeyDown:Connect(function(key)
+    if key:lower() == "y" then
+       for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
+          if v:FindFirstChild("Skill") then 
+            v.Parent = game.Players.LocalPlayer.Character;
+            task.wait();
+            v:Destroy();
+          end
+       end
+    end
+end)
+end)
+
+
+
+
+
+
+Section:NewKeybind("Toggle Gui", "Toggle", Enum.KeyCode.RightAlt, function()
+	Library:ToggleUI()
+end)
+
+
+---QUESTS
+local Tab2 = Window:NewTab("Healer")
+local Section2 = Tab2:NewSection("Healer")
+local tool = "Health Potion"
+
+
+Section2:NewButton("Drink Hp pot", "hp pot", function()
+     _G.Hppot = true
+repeat
+wait()
+game:GetService("Players").LocalPlayer.Backpack["Health Potion"].Parent = game.Players.LocalPlayer.Character
+
+wait(3)
+
+for i,v in pairs(game:GetService("Players").LocalPlayer.Character:GetChildren()) do
+if v:IsA("Tool") and v.Name == tool then
+v:Activate()
+end
+end
+until _G.Hppot == false
+end)
+
+Section2:NewButton("Stop drink hp pot", "hp pot", function()
+     _G.Hppot = false
+end)
+
+Section2:NewButton("Loop teleport to fallion", "fallion", function()
+     _G.Fallion = true
+repeat
+wait()
+plr.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").NPCs.Fallion.HumanoidRootPart.CFrame
+until _G.Fallion == false
+end)
+
+Section2:NewButton("Stop Loop teleport to fallion", "Dorgoth", function()
+     _G.Fallion = false
+end)
+
+Section2:NewButton("Loop teleport to Rem", "fallion", function()
+     _G.Rem = true
+repeat
+wait()
+plr.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").NPCs.Rem.HumanoidRootPart.CFrame
+until _G.Rem == false
+end)
+
+Section2:NewButton("Stop Loop teleport to Rem", "Dorgoth", function()
+     _G.Rem = false
+end)
+
+Section2:NewButton("Start Turnip Buy", "Dorgoth", function()
+     _G.Turnip = true
+repeat
+wait()
+plr.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").NPCs.Dorgoth.HumanoidRootPart.CFrame
+until _G.Turnip == false
+end)
+
+Section2:NewButton("Stop Turnip Buy", "Dorgoth", function()
+     _G.Turnip = false
+end)
+
+Section2:NewButton("Start Quest Turnip", "Hendrick", function()
+     _G.SendTurnip = true 
+repeat
+wait()
+plr.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").NPCs.Hendrick.HumanoidRootPart.CFrame
+until _G.SendTurnip == false
+end)
+
+Section2:NewButton("Stop Quest Turnip", "Hendrick", function()
+     _G.SendTurnip = false
+end)
+
+Section2:NewButton("Start Quest Begger", "Hendrick", function()
+     _G.Begger = true 
+repeat
+wait()
+plr.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").NPCs.Dormin.HumanoidRootPart.CFrame
+until _G.Begger == false
+end)
+
+Section2:NewButton("Stop Quest Begger", "Hendrick", function()
+     _G.Begger = false
+end)
+
+Section2:NewButton("Start Quest Sick Girl", "Alana", function()
+     _G.Alana = true 
+repeat
+wait()
+plr.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").NPCs.Alana.HumanoidRootPart.CFrame
+until _G.Alana == false
+end)
+
+Section2:NewButton("Stop Quest Sick Girl", "Alana", function()
+     _G.Alana = false
+end)
+
+
+
+
+Section2:NewButton("Start Quest Sky paint", "Reneri", function()
+     _G.Reneri = true 
+repeat
+wait()
+plr.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").NPCs.Reneri.HumanoidRootPart.CFrame
+until _G.Reneri == false
+end)
+
+Section2:NewButton("Stop Quest Sky paint", "Reneri", function()
+     _G.Reneri = false
+end)
+
+
+
+Section2:NewButton("Start Quest Vind Girl", "Rita", function()
+     _G.Rita = true 
+repeat
+wait()
+plr.Character.HumanoidRootPart.CFrame = game:GetService("Workspace").NPCs.Rita.HumanoidRootPart.CFrame
+until _G.Rita == false
+end)
+
+Section2:NewButton("Stop Quest Vind Girl", "Reneri", function()
+     _G.Rita = false
+end)
+
+
+
+
+---COLLECTOR
+local Tab4 = Window:NewTab("Collector")
+local Section4 = Tab4:NewSection("Collector")
+Section4:NewButton("Jungle", "Press again if it won't work", function()
+    while wait(1) do
+
+function FoundCollector() 
+game.StarterGui:SetCore("SendNotification", {
+                    Title = "Collector Detected!";
+                    Text = "Pao is pro";
+                    Duration = 9999999999;
+                    Button1 = "ight"
+})
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-2688.46655, 1029.5481, 1467.48914, -0.093883872, 0, -0.995583177, 0, 1, 0, 0.995583177, 0, -0.093883872)
+fireclickdetector(game.Workspace.NPCs.jungleCollector.ClickDetector)
+end
+
+
+if game.Workspace.Map.jungleCollectorDoor.Transparency == 1 then
+    FoundCollector()
+end
+end
+end)
+Section4:NewButton("beach", "Press again if it won't work", function()
+    while wait(1) do
+
+function FoundCollector() 
+game.StarterGui:SetCore("SendNotification", {
+                    Title = "Collector Detected!";
+                    Text = "Pao is pro";
+                    Duration = 9999999999;
+                    Button1 = "ight"
+})
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-921.624878, 241.099426, 272.999756, 0, 0, -1, 0, 1, 0, 1, 0, 0)
+fireclickdetector(game.Workspace.NPCs.beachCollector.ClickDetector)
+end
+
+
+if game.Workspace.Map.beachCollectorDoor.Transparency == 1 then
+    FoundCollector()
+end
+end
+end)
+Section4:NewButton("desert", "Press again if it won't work", function()
+    while wait(1) do
+
+function FoundCollector() 
+game.StarterGui:SetCore("SendNotification", {
+                    Title = "Collector Detected!";
+                    Text = "Pao is pro";
+                    Duration = 9999999999;
+                    Button1 = "ight"
+})
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1547.11768, 354.259705, 2706.39087, 0.318800718, -0.884056211, -0.341776073, -0.190877691, 0.293320745, -0.936765194, 0.928402901, 0.363878757, -0.0752357543)
+fireclickdetector(game.Workspace.NPCs.desertCollector.ClickDetector)
+end
+
+
+if game.Workspace.Map.desertCollectorDoor.Transparency == 1 then
+    FoundCollector()
+end
+end
+end)
+Section4:NewButton("plains", "Press again if it won't work", function()
+    while wait(1) do
+
+function FoundCollector() 
+game.StarterGui:SetCore("SendNotification", {
+                    Title = "Collector Detected!";
+                    Text = "Pao is pro";
+                    Duration = 9999999999;
+                    Button1 = "ight"
+})
+
+game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1279.97937, 1126.0459, -2449.45117, -0.996665716, -0.024980383, -0.0776744485, 9.81125181e-11, 0.951979995, -0.306160182, 0.0815925226, -0.305139393, -0.948805809)
+fireclickdetector(game.Workspace.NPCs.plainsCollector.ClickDetector)
+end
+
+
+if game.Workspace.Map.plainsCollectorDoor.Transparency == 1 then
+    FoundCollector()
+end
+end
+end)
+
+    local SongOfHorse = require(game:GetService("ReplicatedStorage").Info.Songs["Symphony of Horses"])
+    local VinferasSong = require(game:GetService("ReplicatedStorage").Info.Songs["Vinifera's Song"])
+    --ultra bard modules
+    local SongLethargy = require(game:GetService("ReplicatedStorage").Info.Songs["Sweet Soothing"])
+    local JoyousDance = require(game:GetService("ReplicatedStorage").Info.Songs["Joyous Dance"])
+    local SweetSoothing = require(game:GetService("ReplicatedStorage").Info.Songs["Sweet Soothing"])
+
+    --values
+    local maxfail = 10
+    local circleSize = 100
+   --main tab
+    local main = Window:NewTab("Bard")
+    --main section
+    local mainsection = main:NewSection("Bard NoFail")
+    --slider fail limit
+    mainsection:NewSlider("Fail Limit", "", 500, 0.0001, function(s)
+        maxfail = s
+    end)
+    --slider circle Size
+    mainsection:NewSlider("Note Size", "", 500, 0.0001, function(ss)
+        circleSize = ss
+    end)
+    
+    --button for base Bard
+    mainsection:NewButton("Apply Song Of Horses", "", function()
+    SongOfHorse.noteSize = circleSize
+    SongOfHorse.maxErrors = maxfail
+    end)
+    mainsection:NewButton("Apply Vinfera's Song", "", function()
+    VinferasSong.noteSize = circleSize
+    VinferasSong.maxErrors = maxfail
+    end)
+    
+    --button for ultra bard
+    mainsection:NewButton("Apply SongLethargy", "", function()
+    SongLethargy.noteSize = circleSize
+    SongLethargy.maxErrors = maxfail
+    end)
+    mainsection:NewButton("Apply JoyousDance", "", function()
+    JoyousDance.noteSize = circleSize
+    JoyousDance.maxErrors = maxfail
+    end)
+    mainsection:NewButton("Apply SweetSoothing", "", function()
+    SweetSoothing.noteSize = circleSize
+    SweetSoothing.maxErrors = maxfail
+    end)
+    
