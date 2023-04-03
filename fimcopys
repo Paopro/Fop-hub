@@ -460,7 +460,7 @@ end
 
 
 
-Char:AddButton({
+--[[ Char:AddButton({
 Name = "nocd press y (patched)",
 Callback = function()
     
@@ -480,7 +480,7 @@ mouse.KeyDown:Connect(function(key)
     end
 end)
 end
-})
+})--]]
 
 Char:AddButton({
 Name = "Flight press j",
@@ -589,7 +589,7 @@ end
 })
 
 
-local Visual = Main:CreateSection({
+--[[local Visual = Main:CreateSection({
 Name = "Visual"
 })
 
@@ -602,7 +602,7 @@ Callback = function()
     game.Lighting.FogEnd = 100000
     end
 end
-})
+})--]]
 
 
 local Bard = PaoWorld:CreateTab({
