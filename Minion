@@ -12,19 +12,10 @@ local Player = game:GetService("Players").LocalPlayer;
 
 local Tab = Window:NewTab("Character")
 local Section = Tab:NewSection("Character")
-Section:NewButton("Nofall Method 1", "Press again if it won't work", function()
+
+Section:NewButton("Nofall only useable in gaia", "Press again if it won't work", function()
     game:GetService("Players").LocalPlayer.Character.CharacterHandler.Remotes.FallDamage:Destroy()
 end)
-
-Section:NewButton("Nofall Method 2", "Press again if it won't work", function()
-    game.Players.LocalPlayer.Character.CharacterHandler.Remotes.ApplyFallDamage:Destroy()
-end)
-
-Section:NewButton("Nofall Method 3", "Press again if it won't work", function()
-    game:GetService("Players").LocalPlayer.Character.CharacterHandler.Remotes.ApplyFallDamage:Destroy()
-end)
-
-
 
 
 Section:NewButton("Auto Pickup ", "pao pro", function()
