@@ -418,6 +418,29 @@ Section:NewButton("Nofog + Fullbright", "Nofog + Fullbright", function()
     end
 end)
 
+Section:NewButton("Hitbox extender ", "Hitbox extender", function()
+	    for i,v in next, game:GetService('Players'):GetPlayers() do
+	if v.Name ~= game:GetService('Players').LocalPlayer.Name then
+	pcall(function()
+	v.Character.HumanoidRootPart.Size = Vector3.new(HitboxSize,HitboxSize,HitboxSize)
+	v.Character.HumanoidRootPart.Transparency = 0.91
+	v.Character.HumanoidRootPart.BrickColor = BrickColor.new(color)
+	v.Character.HumanoidRootPart.Material = "Neon"
+	v.Character.HumanoidRootPart.CanCollide = false
+	end)
+	end
+	end
+end)
+
+Section:NewSlider("Hitbox size", "SliderInfo", 100, 10, function(s)
+    getgenv().HitboxSize = s
+end)
+
+Section:NewColorPicker("Hitbox color", "Hitbox color", Color3.fromRGB(0,0,0), function(c)
+    getgenv().color = c
+end)
+
+
 Section:NewButton("Get Player Cframe", "Press again if it won't work", function()
     setclipboard(tostring(game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame))
 end)
