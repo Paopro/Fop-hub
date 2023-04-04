@@ -62,10 +62,16 @@ game:GetService("Players").LocalPlayer.Character.CharacterHandler.Remotes.ApplyF
 end
 })
 
-local Killbrick = Main:CreateSection({
-Name = "Killbrick"
+local Fps = Main:CreateSection({
+Name = "Fps booster"
 })
 
+Fps:AddButton({
+Name = "Fps boost (not much)",
+Callback = function()
+loadstring(game:HttpGet("https://raw.githubusercontent.com/Paopro/Fop-hub/main/Fpsboosternotmuch"))()
+end
+})
 
 local Pickup = Main:CreateSection({
 Name = "Pickup"
