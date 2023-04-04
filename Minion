@@ -455,44 +455,6 @@ end
 end
 end)
 
-Section:NewButton("Mod Detector", "Mod detector", function()
-while wait() do
-local mods = {
- "trashg_ame",
- "FirstComesTheStars",
- "SheLovesAdonis",
- "LiterallGalaxy",
- "Regisaqt",
- "NilsberCZ",
- "b4ncck",
- "Scendedee",
- "tx8ekiii",
- "kiznizl",
- "buckmane",
- "VeryMoodyDays",
- "CrimsonRyu",
- "r6yden",
- "robloxsomuchfun60958",
- "Femboy_Poodle",
- "SpirituaILuke",
- "kikigono",
- "kosaderi",
- "tooezforme1212"
-}
-local function rape(v)
-if table.find(mods,v.Name) then
-game.StarterGui:SetCore("SendNotification", {
-Title = "Mod Detected"; -- the title (ofc)
-Text = "Nigga has join the game"; -- what the text says (ofc)
-Icon = "rbxassetid://57254792"; -- the image if u want. 
-Duration = 120; -- how long the notification should in secounds
-})
-end
-end
-for _,v in pairs(game:GetService("Players"):GetPlayers()) do rape(v) end
-game:GetService("Players"):GetPlayers().PlayerAdded:Connect(rape)
-end
-end)
 
 
 
