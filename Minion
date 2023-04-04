@@ -96,7 +96,7 @@ Section:NewButton("Attach to back", "Press X on LocalPlayer Humanoid Part", func
 	 end)
 end)
 
-Section:NewButton("Observe", "Click on Leaderboard", function()
+Section:NewButton("Spectate", "Click on Leaderboard", function()
 	if not game.Players.LocalPlayer.PlayerGui:FindFirstChild("LeaderboardGui") then
 		local NewLB = game.StarterGui:FindFirstChild("LeaderboardGui"):Clone()
 		NewLB.Parent = game.Players.LocalPlayer.PlayerGui
