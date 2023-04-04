@@ -14,7 +14,7 @@ local Tab = Window:NewTab("Character")
 local Section = Tab:NewSection("Character")
 
 Section:NewButton("Nofall only useable in gaia", "Press again if it won't work", function()
-    game:GetService("Players").LocalPlayer.Character.CharacterHandler.Remotes.FallDamage:Destroy()
+    game:GetService("Players").LocalPlayer.Character.CharacterHandler.Remotes.ApplyFallDamage:Destroy()
 end)
 
 
@@ -578,37 +578,6 @@ Char.ChildAdded:Connect(function(Obj)
     end
 end)
 end)
-
-Section:NewButton("Refresh cooldown manuel mode", "no cd", function()
-    local plrs = game:GetService("Players") 
-           for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-              if v:FindFirstChild("Skill") then 
-                v.Parent = game.Players.LocalPlayer.Character;
-                task.wait();
-                v:Destroy();
-              end
-           end
-end)
-
-Section:NewButton("Refresh cooldown press y", "no cd", function()
-
-local plrs = game:GetService("Players")
-local mouse = plrs.LocalPlayer:GetMouse()
-
-mouse.KeyDown:Connect(function(key)
-    if key:lower() == "y" then
-       for i,v in pairs(game.Players.LocalPlayer.Backpack:GetChildren()) do
-          if v:FindFirstChild("Skill") then 
-            v.Parent = game.Players.LocalPlayer.Character;
-            task.wait();
-            v:Destroy();
-          end
-       end
-    end
-end)
-end)
-
-
 
 
 
