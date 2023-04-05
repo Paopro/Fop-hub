@@ -720,10 +720,10 @@ end)
 ---COLLECTOR
 local Tab4 = Window:NewTab("Collector")
 local Section4 = Tab4:NewSection("Collector")
-Section4:NewButton("Jungle", "Press again if it won't work", function()
+Section4:NewButton("Auto teleport to collector", "Press again if it won't work", function()
     while wait(1) do
 
-function FoundCollector() 
+function jungleCollector() 
 game.StarterGui:SetCore("SendNotification", {
                     Title = "Collector Detected!";
                     Text = "Pao is pro";
@@ -736,15 +736,7 @@ fireclickdetector(game.Workspace.NPCs.jungleCollector.ClickDetector)
 end
 
 
-if game.Workspace.Map.jungleCollectorDoor.Transparency == 1 then
-    FoundCollector()
-end
-end
-end)
-Section4:NewButton("beach", "Press again if it won't work", function()
-    while wait(1) do
-
-function FoundCollector() 
+function beachCollector() 
 game.StarterGui:SetCore("SendNotification", {
                     Title = "Collector Detected!";
                     Text = "Pao is pro";
@@ -756,16 +748,7 @@ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-921.624
 fireclickdetector(game.Workspace.NPCs.beachCollector.ClickDetector)
 end
 
-
-if game.Workspace.Map.beachCollectorDoor.Transparency == 1 then
-    FoundCollector()
-end
-end
-end)
-Section4:NewButton("desert", "Press again if it won't work", function()
-    while wait(1) do
-
-function FoundCollector() 
+function desertCollector() 
 game.StarterGui:SetCore("SendNotification", {
                     Title = "Collector Detected!";
                     Text = "Pao is pro";
@@ -777,16 +760,7 @@ game.Players.LocalPlayer.Character.HumanoidRootPart.CFrame = CFrame.new(-1547.11
 fireclickdetector(game.Workspace.NPCs.desertCollector.ClickDetector)
 end
 
-
-if game.Workspace.Map.desertCollectorDoor.Transparency == 1 then
-    FoundCollector()
-end
-end
-end)
-Section4:NewButton("plains", "Press again if it won't work", function()
-    while wait(1) do
-
-function FoundCollector() 
+function plainsCollector() 
 game.StarterGui:SetCore("SendNotification", {
                     Title = "Collector Detected!";
                     Text = "Pao is pro";
@@ -799,9 +773,22 @@ fireclickdetector(game.Workspace.NPCs.plainsCollector.ClickDetector)
 end
 
 
-if game.Workspace.Map.plainsCollectorDoor.Transparency == 1 then
-    FoundCollector()
+if game.Workspace.Map.jungleCollectorDoor.Transparency == 1 then
+    jungleCollector()
 end
+
+if game.Workspace.Map.beachCollectorDoor.Transparency == 1 then
+    beachcollector()
+end
+
+if game.Workspace.Map.desertCollectorDoor.Transparency == 1 then
+    desertCollector()
+end
+
+if game.Workspace.Map.plainsCollectorDoor.Transparency == 1 then
+    plainsCollector()
+end
+
 end
 end)
 
